@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Priyanshu Kanyal's personal portfolio website showcasing projects, skills, and professional certifications." />
+  <title>Priyanshu Kanyal | Portfolio</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="#" class="nav-logo">
+        <span class="logo-text">Priyanshu Kanyal</span>
+</a>
+      <ul class="nav-menu">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-toggles">
+          <button id="theme-toggle" class="icon-btn">🌙</button>
+          <button class="hamburger icon-btn">
+              <i class="fas fa-bars"></i>
+          </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">Hi, I'm Priyanshu Kanyal 👋</h1>
+        <p class="hero-subtitle">
+          A passionate Computer Science student crafting impactful digital experiences with cloud technologies and modern web development.
+        </p>
+        <div class="hero-links">
+            <a href="#projects" class="btn btn-primary">View My Work</a>
+            <a href="resume.pdf" download class="btn btn-secondary">
+                Resume <i class="fas fa-download"></i>
+            </a>
+            <a href="https://github.com/Priyanshu-Kanyal" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Visit My GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-container">
+            
+            <div class="about-text">
+                <p>
+                  I'm a B.Tech in Computer Science student at VIT Amaravati (CGPA: 9.17/10), specializing in full-stack development, data analysis, and cloud computing.
+                </p>
+                <p>
+                  As an <strong>AWS Certified Cloud Practitioner</strong> and <strong>Oracle Certified Generative AI Professional</strong>, I have hands-on experience building, deploying, and securing scalable cloud applications.
+                </p>
+                <p>
+                  Beyond the code, I enjoy mentoring fellow students, organizing workshops, and contributing to the competitive programming community to foster a culture of learning and growth.
+                </p>
+            </div>
+            <div class="about-photo">
+              <img src="me1.jpg" alt="Priyanshu Kanyal" />
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+      <h2 class="section-title">Technical Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card"><i class="fab fa-java"></i> Java</div>
+        <div class="skill-card"><i class="fab fa-python"></i> Python</div>
+        <div class="skill-card"><i class="fab fa-js-square"></i> JavaScript</div>
+        <div class="skill-card"><i class="fas fa-database"></i> SQL</div>
+        <div class="skill-card"><i class="fas fa-leaf"></i> MongoDB</div>
+        <div class="skill-card"><i class="fab fa-react"></i> React.js</div>
+        <div class="skill-card"><i class="fab fa-node-js"></i> Node.js</div>
+        <div class="skill-card"><i class="fab fa-git-alt"></i> Git & GitHub</div>
+        <div class="skill-card"><i class="fas fa-cogs"></i> REST APIs</div>
+        <div class="skill-card"><i class="fas fa-users"></i> Agile Dev</div>
+        <div class="skill-card"><i class="fab fa-aws"></i> AWS</div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card featured">
+          <img src="images/project1-placeholder.png" alt="Family Expense Tracker Project" class="project-img" />
+          <div class="project-content">
+            <h3 class="project-title">Family Expense Tracker</h3>
+            <p class="project-description">A full-stack MERN application to manage and visualize household income and expenses with dynamic category and timeline filtering.</p>
+            <div class="project-links">
+              <a href="#" class="btn-link" target="_blank" rel="noopener noreferrer">Live Demo <i class="fas fa-external-link-alt"></i></a>
+              <a href="#" class="btn-link" target="_blank" rel="noopener noreferrer">Source Code <i class="fab fa-github"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="project-card featured">
+          <img src="images/project2-placeholder.png" alt="Population Predictor Project" class="project-img" />
+          <div class="project-content">
+            <h3 class="project-title">Population Predictor</h3>
+            <p class="project-description">A regression model developed in Python with Matplotlib and Seaborn to predict future population trends based on historical data.</p>
+             <div class="project-links">
+              <a href="https://github.com/Priyanshu-Kanyal/Population-Predictor" class="btn-link" target="_blank" rel="noopener noreferrer">Source Code <i class="fab fa-github"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <h2 class="section-title" style="margin-top: 3rem;">Projects on GitHub</h2>
+      <div id="github-projects" class="projects-grid">
+          <div class="loader"></div>
+      </div>
+    </section>
+    <section id="certifications">
+      <h2 class="section-title">Certifications</h2>
+      <div class="certs-grid">
+        <div class="cert-card">
+          <img src="aws.png" alt="AWS Certified Cloud Practitioner Badge">
+          <h3>AWS Certified Cloud Practitioner</h3>
+          <a href="https://cp.certmetrics.com/amazon/en/public/verify/credential/604ffbd21ae648af9d0a19a50b20237d" target="_blank" rel="noopener noreferrer" class="btn-link">
+            View Credential <i class="fas fa-external-link-alt"></i>
+          </a>
+        </div>
+
+        <div class="cert-card">
+          <img src="oracle.png" alt="Oracle Generative AI Professional Badge">
+          <h3>Oracle Cloud Infrastructure Generative AI Professional</h3>
+          <a href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=4B36AD4EE2211927E8FA11D9B8C3CF54982D0343D957A624FA42630AC6821FAF" target="_blank" rel="noopener noreferrer" class="btn-link">
+            View Credential <i class="fas fa-external-link-alt"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <p>Have a question or a project in mind? I'd love to hear from you. Fill out the form or reach out through my social channels.</p>
+                <div class="contact-details">
+                    <p><i class="fas fa-map-marker-alt"></i> Ranikhet, Uttarakhand</p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:kanyalpriyanshu1@gmail.com">kanyalpriyanshu1@gmail.com</a></p>
+                </div>
+                <div class="contact-social">
+                    <a href="https://www.linkedin.com/in/priyanshu-kanyal-7808a7275" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/Priyanshu-Kanyal" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://leetcode.com/u/Priyanshu--Kanyal/" target="_blank" rel="noopener noreferrer" aria-label="LeetCode"><i class="fas fa-code"></i></a>
+                </div>
+            </div>
+            <form class="contact-form" action="https://formspree.io/f/xpwlnyzz" method="POST">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" required placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" required placeholder="Your Email">
+                </div>
+                <div class="form-group">
+                    <textarea id="message" name="message" rows="5" required placeholder="Your Message"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Priyanshu Kanyal | Built with ❤️ and a lot of coffee</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
