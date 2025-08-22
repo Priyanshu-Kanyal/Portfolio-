@@ -53,117 +53,71 @@ document.addEventListener('DOMContentLoaded', () => {
           }
       });
   });
-
-// --- Fetch Pinned GitHub Repositories with README Images (Corrected for Relative Paths) ---
-  const GITHUB_USERNAME = 'Priyanshu-Kanyal';
-  const GITHUB_PAT = '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'; // 👈 PASTE YOUR GITHUB TOKEN HERE
+  
+  // --- Fetch Pinned GitHub Repositories via Vercel Serverless Function ---
   const projectsContainer = document.getElementById('github-projects');
 
-  // This GraphQL query is updated to get the default branch name (e.g., 'main' or 'master')
-  const query = `
-    query {
-      user(login: "${GITHUB_USERNAME}") {
-        pinnedItems(first: 6, types: REPOSITORY) {
-          nodes {
-            ... on Repository {
-              name
-              description
-              url
-              defaultBranchRef {
-                name
-              }
-              readme: object(expression: "HEAD:README.md") {
-                ... on Blob {
-                  text
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
-
-  /**
-   * A helper function to find the first Markdown image URL and convert it to an absolute path if necessary.
-   * @param {object} repo - The repository object from the GitHub API.
-   * @returns {string} The absolute URL of the first image, or a placeholder if none is found.
-   */
+  // Helper function to handle images remains the same
   const extractFirstImageUrl = (repo) => {
-    const readmeText = repo.readme ? repo.readme.text : null;
-    const placeholder = 'https://placehold.co/600x400/2E7D32/FFFFFF?text=Project';
+      // ... (keep the existing extractFirstImageUrl function here)
+      const GITHUB_USERNAME = 'Priyanshu-Kanyal'; // Keep username here for URL construction
+      const readmeText = repo.readme ? repo.readme.text : null;
+      const placeholder = 'https://placehold.co/600x400/2E7D32/FFFFFF?text=Project';
 
-    if (!readmeText) {
-      return placeholder;
-    }
+      if (!readmeText) { return placeholder; }
 
-    // This regular expression looks for the first Markdown image: ![alt](url)
-    const regex = /!\[.*?\]\((.*?)\)/;
-    const match = readmeText.match(regex);
+      const regex = /!\[.*?\]\((.*?)\)/;
+      const match = readmeText.match(regex);
 
-    if (match && match[1]) {
-      const imageUrl = match[1];
-
-      // Check if the URL is already absolute (starts with http)
-      if (imageUrl.startsWith('http')) {
-        return imageUrl;
+      if (match && match[1]) {
+          const imageUrl = match[1];
+          if (imageUrl.startsWith('http')) { return imageUrl; }
+          const branch = repo.defaultBranchRef ? repo.defaultBranchRef.name : 'main';
+          return `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repo.name}/${branch}/${imageUrl}`;
       }
-      
-      // If the URL is relative, construct the full raw GitHub content URL
-      const branch = repo.defaultBranchRef ? repo.defaultBranchRef.name : 'main';
-      return `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repo.name}/${branch}/${imageUrl}`;
-    }
-
-    return placeholder;
+      return placeholder;
   };
 
-  fetch('https://api.github.com/graphql', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${GITHUB_PAT}`
-    },
-    body: JSON.stringify({ query })
-  })
-  .then(res => res.json())
-  .then(data => {
-    // Clear the loader
-    projectsContainer.innerHTML = '';
-    const pinnedRepos = data.data.user.pinnedItems.nodes;
+  // The fetch call is now much simpler and more secure
+  fetch('/api/github') // This calls your new serverless function
+    .then(res => {
+        if (!res.ok) {
+            throw new Error(`Server responded with ${res.status}`);
+        }
+        return res.json();
+    })
+    .then(data => {
+      projectsContainer.innerHTML = ''; // Clear the loader
+      const pinnedRepos = data.data.user.pinnedItems.nodes;
 
-    pinnedRepos.forEach(repo => {
-      // Pass the entire repo object to the helper function
-      const imageUrl = extractFirstImageUrl(repo);
-
-      const card = document.createElement('div');
-      card.className = 'project-card';
-      
-      card.innerHTML = `
-        <img 
-          src="${imageUrl}" 
-          alt="${repo.name} project preview" 
-          class="project-img"
-          onerror="this.onerror=null;this.src='https://placehold.co/600x400/2E7D32/FFFFFF?text=Image+Not+Found';"
-        >
-        <div class="project-content">
-          <h3 class="project-title">${repo.name}</h3>
-          <p class="project-description">${repo.description || 'No description available.'}</p>
-          <div class="project-links">
-            <a href="${repo.url}" target="_blank" rel="noopener noreferrer">
-              View on GitHub <i class="fab fa-github"></i>
-            </a>
+      pinnedRepos.forEach(repo => {
+        const imageUrl = extractFirstImageUrl(repo);
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.innerHTML = `
+          <img 
+            src="${imageUrl}" 
+            alt="${repo.name} project preview" 
+            class="project-img"
+            onerror="this.onerror=null;this.src='https://placehold.co/600x400/2E7D32/FFFFFF?text=Image+Not+Found';"
+          >
+          <div class="project-content">
+            <h3 class="project-title">${repo.name}</h3>
+            <p class="project-description">${repo.description || 'No description available.'}</p>
+            <div class="project-links">
+              <a href="${repo.url}" target="_blank" rel="noopener noreferrer">
+                View on GitHub <i class="fab fa-github"></i>
+              </a>
+            </div>
           </div>
-        </div>
-      `;
-      projectsContainer.appendChild(card);
+        `;
+        projectsContainer.appendChild(card);
+      });
+    })
+    .catch(err => {
+      console.error('Error fetching projects:', err);
+      projectsContainer.innerHTML = `<p style="text-align: center; color: #f44336;">Failed to load projects from Vercel function.</p>`;
     });
-  })
-  .catch(err => {
-    console.error('Error fetching pinned GitHub repos:', err);
-    projectsContainer.innerHTML = `<p style="text-align: center; color: #f44336;">Failed to load pinned projects. Ensure your GitHub token is correct.</p>`;
-  });
-
-
 
 
   
